@@ -1,13 +1,17 @@
-[![Build Status](https://travis-ci.org/pglez82/travisreact_tut.svg?branch=master)](https://travis-ci.org/pglez82/travisreact_tut.svg) [![codecov](https://codecov.io/gh/pglez82/travisreact_tut/branch/master/graph/badge.svg)](https://codecov.io/gh/pglez82/travisreact_tut) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2f1d352bb3c8454cb77353f3e2098476)](https://www.codacy.com/manual/pglez82/travisreact_tut?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pglez82/travisreact_tut&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/pglez82/travisreact_tut.svg?branch=master)](https://travis-ci.org/pglez82/travisreact_tut.svg) 
+[![codecov](https://codecov.io/gh/pglez82/travisreact_tut/branch/master/graph/badge.svg)](https://codecov.io/gh/pglez82/travisreact_tut) 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2f1d352bb3c8454cb77353f3e2098476)](https://www.codacy.com/manual/pglez82/travisreact_tut?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pglez82/travisreact_tut&amp;utm_campaign=Badge_Grade)
+
+# VIADE_0
 
 This project shows how to create a new react webapp and configure it using travis in order to enable continuous integration.
 
 ## Setting up the enviroment
 We are going to prepare the enviroment using docker. This way we will ensure that the setup will work without depending on our local setup. Lets create a Ubuntu 18.04LTS container as our development enviroment:
 ```
-docker run -it -v "$PWD/Proyectos/travisreact_tut":/webapps -p 3000:3000 --name travisreact_tut ubuntu:18.04
+docker run -it -v "$PWD/Projects/viade_0":/webapps -p 3000:3000 --name viade_0 ubuntu:18.04
 ```
-Note: "$PWD/Proyectos/travisreact_tut" will be the route of the folder (in your machine) where you want to store the project. You should create this folder. Change the route accordingly. 
+Note: "$PWD/Projects/viade_0" will be the route of the folder (in your machine) where you want to store the project. You should create this folder. Change the route accordingly. 
 
 This Ubuntu 18.04 image does not have Node installed. We could have chosen here a docker image with node but we are using this one in order to illustrate how to **install node** in Ubuntu:
 ```bash
@@ -22,7 +26,7 @@ Let's install also the git client. We will use this as travis needs that our cod
 ```
 apt-get install git
 ```
-Also install nano our your other text editor of your preference:
+Also install nano or your other text editor of your preference:
 ```
 apt-get install nano
 ```
@@ -76,7 +80,7 @@ deploy:
 ```
 We also need to configure the file `package.json`. In this file we will add a new line indicating where our application will be deployed:
 ```json
-"homepage": "https://pglez82.github.io/travisreact_tut/",
+"homepage": "https://arquisoft.github.io/viade_0/",
 ```
 
 As a final step, we need to make sure that we are using the gh-pages branch as our repository page (this is configured in the settings part of our repository).
@@ -161,7 +165,9 @@ deploy:
 
 In this file we need to pay attention to the `before_install` section where we are installing the dependencies for running asciidoctor (with PlantUML support) and then, after running `npm run build`, execute `npm run docs` that will generate the docs inside the build directory. We do not have to change anything else as we are deploying the build directory in the next section. If everything worked properly we should be able to see the documentation under:
 
-[https://pglez82.github.io/travisreact_tut/docs/index.html](https://pglez82.github.io/travisreact_tut/docs/index.html)
+[https://arquisoft.github.io/viade_0/docs/index.html](https://arquisoft.github.io/viade_0/docs/index.html)
 
 ## More about testing
-The default setup for testing a react app is a testing framework called [Jest](https://jestjs.io/). Jest allow us to run only the relevant tests for the changed code. That means that if we change a file, it will run only the tests related with this file. Obviously we have the option of running all tests if we want. Jest is launched executing `npm test` as we have seen before. Test library used by default is [React testing library](https://github.com/testing-library/react-testing-library). This library is designed to easily test React components using the DOM elements.
+The default setup for testing a react app is a testing framework called [Jest](https://jestjs.io/). Jest allow us to run only the relevant tests for the changed code. That means that if we change a file, it will run only the tests related with this file. 
+
+Obviously we have the option of running all tests if we want. Jest is launched executing `npm test` as we have seen before. Test library used by default is [React testing library](https://github.com/testing-library/react-testing-library). This library is designed to easily test React components using the DOM elements.
